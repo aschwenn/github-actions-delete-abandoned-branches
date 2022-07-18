@@ -22,6 +22,9 @@ inputs:
   github_token:
     description: "The github token to use on requests to the github api"
     required: true
+  github_base_url:
+    description: "The API base url to be used in requests to GitHub Enterprise"
+    required: false
 
 outputs:
   deleted_branches: # id of output
@@ -29,7 +32,7 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'docker://phpdockerio/github-actions-delete-abandoned-branches:latest'
+  image: 'docker://kumo-docker-release-local.artylab.expedia.biz/library/delete-abandoned-branches:latest'
   args:
     - ${{ inputs.ignore_branches }}
     - ${{ inputs.last_commit_age_days }}
