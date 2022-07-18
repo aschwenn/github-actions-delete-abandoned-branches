@@ -9,6 +9,9 @@ jobs:
   build_and_push:
     runs-on: eg-default
     name: Builds the image and publishes to docker hub
+    env:
+      KUMO_RELEASE_REPO: kumo-docker-release-local.artylab.expedia.biz
+      APP_NAME: delete-abandoned-branches
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -23,9 +26,17 @@ jobs:
       - name: Grab version
         run: echo VERSION="$(cat .version)" >> $GITHUB_ENV
 
-      - name: Build and Push Docker Image
+      - name: Docker meta
+        id: meta
+        uses: actions/docker-metadata-action@v3
+        with:
+          images: ${{ env.KUMO_RELEASE_REPO }}/library/${{ env.APP_NAME }}
+          tags: ${{ env.VERSION }}
+
+      - name: Build Docker image
         uses: actions/docker-build-push-action@v2
         with:
           context: .
           push: true
-          tags: kumo-docker-release-local.artylab.expedia.biz/library/${{ github.event.repository.name }}:${{ env.VERSION }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
