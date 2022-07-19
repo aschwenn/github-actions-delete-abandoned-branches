@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - .version
 
 jobs:
   build_and_push:
