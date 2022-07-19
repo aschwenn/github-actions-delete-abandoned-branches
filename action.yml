@@ -38,3 +38,4 @@ runs:
     - ${{ inputs.last_commit_age_days }}
     - ${{ inputs.dry_run }}
     - ${{ inputs.github_token }}
+    - ${{ inputs.github_base_url }}
