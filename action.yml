@@ -32,7 +32,7 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'docker://expediagroup-docker-internal-local.artylab.expedia.biz/delete-abandoned-branches:latest'
+  image: 'Dockerfile'
   args:
     - ${{ inputs.ignore_branches }}
     - ${{ inputs.last_commit_age_days }}
