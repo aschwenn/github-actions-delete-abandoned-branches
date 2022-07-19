@@ -10,7 +10,7 @@ jobs:
     runs-on: eg-default
     name: Builds the image and publishes to docker hub
     env:
-      KUMO_RELEASE_REPO: kumo-docker-release-local.artylab.expedia.biz
+      KUMO_RELEASE_REPO: expediagroup-docker-internal-local.artylab.expedia.biz
       APP_NAME: delete-abandoned-branches
     steps:
       - name: Check out the repo
